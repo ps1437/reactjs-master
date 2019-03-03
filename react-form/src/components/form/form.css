@@ -1,0 +1,64 @@
+.panel .table-responsive {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,e5e5e5+100;White+3D */
+  background: rgb(255, 255, 255); /* Old browsers */
+  background: -moz-linear-gradient(
+    top,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(229, 229, 229, 1) 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(229, 229, 229, 1) 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(229, 229, 229, 1) 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+}
+.panel-primary > .panel-heading {
+  font-weight: 700;
+  background: rgb(109, 179, 242); /* Old browsers */
+  background: -moz-linear-gradient(
+    top,
+    rgba(109, 179, 242, 1) 0%,
+    rgba(84, 163, 238, 1) 50%,
+    rgba(54, 144, 240, 1) 51%,
+    rgba(30, 105, 222, 1) 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    rgba(109, 179, 242, 1) 0%,
+    rgba(84, 163, 238, 1) 50%,
+    rgba(54, 144, 240, 1) 51%,
+    rgba(30, 105, 222, 1) 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    rgba(109, 179, 242, 1) 0%,
+    rgba(84, 163, 238, 1) 50%,
+    rgba(54, 144, 240, 1) 51%,
+    rgba(30, 105, 222, 1) 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6db3f2', endColorstr='#1e69de',GradientType=0 ); /* IE6-9 */
+}
+
+.update {
+  background-color: #2196f8;
+  color: white;
+}
+.wrapper {
+  text-align: center;
+}
+
+.button {
+  position: absolute;
+  top: 50%;
+}
+
+.form {
+  width: 450px;
+  margin-top: 20px;
+}

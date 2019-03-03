@@ -1,68 +1,23 @@
 import React, { Component } from "react";
-import RegForm from "./components/RegForm";
-import ListUser from "./components/ListUser";
+import RegForm from "./components/form/RegForm";
+import ListUser from "./components/list/ListUser";
 import "./App.css";
-
-class AppLocalStorage extends Component {
+import Toggle from "./components/slider/Toggle";
+class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       userList: [],
-      showList: true,
+      toggle: true,
+      editFlag: false,
+
       selectedUser: [{ username: "", emailId: "" }]
     };
 
     this.toggleListHandler = this.toggleListHandler.bind(this);
-    this.addUser = this.addUser.bind(this);
-    this.deleteHandler = this.deleteHandler.bind(this);
-    this.editHandler = this.editHandler.bind(this);
-    this.updateUserHandler = this.updateUserHandler.bind(this);
-  }
-  addUser(uname, email) {
-    let uList = [...this.state.userList];
-    uList.push({ username: uname, emailId: email });
-    this.setState({ userList: uList });
   }
 
-  deleteHandler = userIndex => {
-    let modifyList = [...this.state.userList];
-    
-    modifyList.splice(userIndex,1);
-
-    // let filerList = modifyList.filter(user =>{
-    //   return user.name != name;
-    // })
-
-    // this.setState({ userList: filerList });
-    this.setState({ userList: modifyList });
-  };
-
-  editHandler = userIndex => {
-    const selectedUser = this.state.userList[userIndex];
-    console.log(selectedUser.emailId+"-----------"+selectedUser.username);
-    this.setState({ selectedUser: selectedUser });
-  };
-
-
-  
-  
-  updateUserHandler = (uname, emailId) => {
-    let userList = this.state.userList;
- 
-    userList = userList.map((user) => {
-      console.log(uname +"------------"+user.username)
-      if (user.username === uname) {
-            console.log('heree');
-            user.username = uname;
-            console.log('heree');
-           user.emailId = emailId;
-      }
-      return user;
-    });
-
-    this.setState({ userList: userList });
-  };
   componentDidMount() {
     const list = [
       { username: "Praveen", emailId: "praveen123@gmail.com" },
@@ -73,35 +28,88 @@ class AppLocalStorage extends Component {
     this.setState({ userList: list });
   }
 
+  addUser = (uname, email) => {
+    let uList = [...this.state.userList];
+    uList.push({ username: uname, emailId: email });
+    this.setState({ userList: uList });
+  };
+
+  deleteHandler = userIndex => {
+    let modifyList = [...this.state.userList]; //copy
+    modifyList.splice(userIndex, 1);
+    this.setState({ userList: modifyList });
+  };
+
+  editHandler = userIndex => {
+    const selectedUser = this.state.userList[userIndex];
+    this.setState({ editFlag: true, selectedUser: selectedUser });
+  };
+
+  updateUserHandler = (uname, emailId) => {
+    let userList = this.state.userList;
+    userList = userList.map(user => {
+      if (user.username === uname) {
+        user.username = uname;
+        user.emailId = emailId;
+      }
+      return user;
+    });
+
+    this.setState({
+      editFlag: false,
+      userList: userList,
+      selectedUser: { username: "", emailId: "" }
+    });
+  };
+
   toggleListHandler() {
-    const show = this.state.showList;
-    this.setState({ showList: !show });
+    const show = this.state.toggle;
+    this.setState({ toggle: !show });
   }
 
   render() {
+    const toggleStatus = this.state.toggle;
+    let userList = null;
+    if (toggleStatus) {
+      userList = (
+        <ListUser
+          userList={this.state.userList}
+          deleteHandler={this.deleteHandler}
+          editHandler={this.editHandler}
+        />
+      );
+    }
     return (
-      <div className="container jumbotron">
-        <div className="card">
-          <div className="card-body">
-            <RegForm
-              addUser={this.addUser}
-              user={this.state.selectedUser}
-              updateUserHandler={this.updateUserHandler}
-            />
-            <div className="text-center">
-              <ListUser
-                toggleListHandler={this.toggleListHandler}
-                showList={this.state.showList}
-                userList={this.state.userList}
-                deleteHandler={this.deleteHandler}
-                editHandler={this.editHandler}
+      <div className=" center_div container">
+        <div className="app">
+          {" "}
+          <h1>
+            Reactjs <b>CRUD</b> Application{" "}
+          </h1>
+        </div>
+        <div className="row">
+          <div className="panel panel-primary">
+            <div className="panel-heading text-center">ADD USER</div>
+            <div className="panel-body">
+              <RegForm
+                addUser={this.addUser}
+                editFlag={this.state.editFlag}
+                user={this.state.selectedUser}
+                updateUserHandler={this.updateUserHandler}
               />
             </div>
           </div>
         </div>
+        <div className="float-left">
+          <Toggle
+            toggleListHandler={this.toggleListHandler}
+            toggle={this.state.toggle}
+          />
+        </div>
+        {userList}
       </div>
     );
   }
 }
 
-export default AppLocalStorage;
+export default App;
